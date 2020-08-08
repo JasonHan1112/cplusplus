@@ -1,6 +1,9 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+
+#include <string>
+#include <algorithm>
 using namespace std;
 
 
@@ -51,14 +54,44 @@ int Answer::reverse(int x) {
     
     return (int)ret;
 }
+class Answer_o {
+    public:
+        int reverse_int(int c);
+};
+
+int Answer_o:: reverse_int(int c) {
+    long ret = 0;
+    string tmp((to_string(c)));
+    cout << "tmp string: " << tmp << endl;
+    std::reverse(tmp.begin(), tmp.end());
+    cout << "reverse tmp string: " << tmp << endl;
+    
+    ret = stol(tmp);
+    cout << "return int: " << ret << endl;
+
+    if (ret < -pow(2, 31) || ret > (pow(2, 31) - 1)) {
+        cout << "in the wrong range" << endl;
+        ret = 0;;
+    }
+    return ret;
+}
 
 int main(void)
 {
     cout << "hello world" << endl;
+#if 0 //method1
     Answer a;
     int number = 2147483648;
     cout << "input number: " << number << endl;
 
     a.reverse(number);
+#endif
+#if 1 //method2
+    Answer_o a;
+    int number = 12345678;
+    cout << "input number: " << number << endl;
+    
+    a.reverse_int(number);
+#endif
     return 0;
 }
